@@ -18,6 +18,21 @@ module "subnet" {
   subnet = var.subnets
 }
 
+module "public_ip" {
+  depends_on = [module.resource_group]
+  source     = "../../modules/04-azurerm_public_ip"
+
+  pip = var.pips
+
+}
+
+module "network_security_group" {
+  depends_on = [module.subnet]
+  source     = "../../modules/azurerm_network_security_group"
+
+  nsg = var.nsgs
+}
+
 module "network_interface" {
   depends_on = [module.subnet]
   source     = "../../modules/04-azurerm_network_interface_card"
@@ -33,17 +48,18 @@ module "bastion" {
   bastion = var.bastions
 }
 
+# module "vault" {
+#   depends_on = [ module.resource_group ]
+#   source = "../../modules/azurerm_key_vault"
+
+#   vault = var.vaults
+
+# }
+
+
 module "linux_vm" {
   depends_on = [module.network_interface]
   source     = "../../modules/06-azurerm_linux_virtual_machine"
 
   vm = var.vms
-}
-
-module "vault" {
-  depends_on = [ module.resource_group ]
-  source = "../../modules/azurerm_key_vault"
-
-  vault = var.vaults
-  
 }

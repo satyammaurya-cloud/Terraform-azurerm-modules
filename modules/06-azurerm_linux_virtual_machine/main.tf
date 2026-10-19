@@ -16,8 +16,11 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
 
   network_interface_ids = [data.azurerm_network_interface.nic[each.key].id]
   
-  admin_username                  = data.azurerm_key_vault_secret.username.value
-  admin_password                  = data.azurerm_key_vault_secret.password.value
+  # admin_username                  = data.azurerm_key_vault_secret.username.value
+  # admin_password                  = data.azurerm_key_vault_secret.password.value
+  admin_username                  = "IT"
+  admin_password                  = "Satyam@12345"
+
   disable_password_authentication = false
 
   os_disk {

@@ -14,7 +14,6 @@ vnets = {
   }
 }
 
-
 subnets = {
   subnet1 = {
     name                 = "AzureBastionSubnet"
@@ -35,6 +34,74 @@ subnets = {
     resource_group_name  = "axion-rg"
     virtual_network_name = "axion-vnet"
     address_prefixes     = ["10.0.3.0/24"]
+  }
+}
+
+pips = {
+  pip1 = {
+    name                = "bastion-pip"
+    location            = "centralindia"
+    resource_group_name = "axion-rg"
+    allocation_method   = "Static"
+  }
+}
+
+nsgs = {
+
+  frontend-nsg = {
+    name                = "frontend-vm-nsg"
+    location            = "centralindia"
+    resource_group_name = "lko-rg"
+
+    rules = [
+      {
+        name        = "allow-http"
+        priority    = 110
+        direction   = "Inbound"
+        access      = "Allow"
+        protocol    = "Tcp"
+        source      = "Internet"
+        destination = "80"
+      },
+
+      {
+        name        = "allow-ssh"
+        priority    = 120
+        direction   = "Inbound"
+        access      = "Allow"
+        protocol    = "Tcp"
+        source      = "10.0.10.0/24"
+        destination = "22"
+      }
+    ]
+  }
+
+  backend-nsg = {
+    name                = "backend-vm-nsg"
+    location            = "centralindia"
+    resource_group_name = "lko-rg"
+
+    rules = [
+      {
+        name        = "allow-app"
+        priority    = 100
+        direction   = "Inbound"
+        access      = "Allow"
+        protocol    = "Tcp"
+        source      = "10.0.10.0/24"
+        destination = "8000" # Any application running 5000, 8000
+      },
+
+      {
+        name        = "allow-ssh"
+        priority    = 110
+        direction   = "Inbound"
+        access      = "Allow"
+        protocol    = "Tcp"
+        source      = "10.0.10.0/24"
+        destination = "22"
+      }
+    ]
   }
 }
 
@@ -76,11 +143,11 @@ vms = {
   }
 }
 
-vaults = {
-  vault1 = {
-    name                = "mypersonal-tijori"
-    location            = "centralindia"
-    resource_group_name = "axion-rg"
-  }
-}
+# vaults = {
+#   vault1 = {
+#     name                = "mypersonal-tijori"
+#     location            = "centralindia"
+#     resource_group_name = "axion-rg"
+#   }
+# }
 
