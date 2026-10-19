@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.15.8",
-  "serial": 16,
+  "serial": 22,
   "lineage": "55ad295d-067d-bc31-68be-6b1175a6c729",
   "outputs": {},
   "resources": [
@@ -108,11 +108,11 @@
             "session_recording_enabled": false,
             "shareable_link_enabled": false,
             "sku": "Basic",
-            "tags": null,
+            "tags": {},
             "timeouts": null,
             "tunneling_enabled": false,
             "virtual_network_id": "",
-            "zones": null
+            "zones": []
           },
           "sensitive_attributes": [],
           "identity_schema_version": 0,
@@ -170,7 +170,7 @@
             ],
             "ip_forwarding_enabled": false,
             "location": "centralindia",
-            "mac_address": "",
+            "mac_address": "70-A8-A5-68-86-F1",
             "name": "frontend-vm-nic",
             "network_security_group_id": "",
             "private_ip_address": "10.0.2.4",
@@ -180,7 +180,7 @@
             "resource_group_name": "axion-rg",
             "tags": {},
             "timeouts": null,
-            "virtual_machine_id": ""
+            "virtual_machine_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Compute/virtualMachines/frontend-vm"
           },
           "sensitive_attributes": [],
           "identity_schema_version": 0
@@ -270,8 +270,8 @@
                 "version": "latest"
               }
             ],
-            "tags": null,
-            "termination_notification": null,
+            "tags": {},
+            "termination_notification": [],
             "timeouts": null,
             "user_data": "",
             "virtual_machine_id": "a892c422-3259-4fbb-bc4a-9572b3eafdd0",
@@ -382,7 +382,7 @@
             "applied_dns_servers": [],
             "auxiliary_mode": "",
             "auxiliary_sku": "",
-            "dns_servers": null,
+            "dns_servers": [],
             "edge_zone": "",
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/frontend-vm-nic",
             "internal_dns_name_label": "",
@@ -401,16 +401,16 @@
             ],
             "ip_forwarding_enabled": false,
             "location": "centralindia",
-            "mac_address": "",
+            "mac_address": "70-A8-A5-68-86-F1",
             "name": "frontend-vm-nic",
             "private_ip_address": "10.0.2.4",
             "private_ip_addresses": [
               "10.0.2.4"
             ],
             "resource_group_name": "axion-rg",
-            "tags": null,
+            "tags": {},
             "timeouts": null,
-            "virtual_machine_id": ""
+            "virtual_machine_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Compute/virtualMachines/frontend-vm"
           },
           "sensitive_attributes": [],
           "identity_schema_version": 0,
@@ -435,7 +435,7 @@
             "applied_dns_servers": [],
             "auxiliary_mode": "",
             "auxiliary_sku": "",
-            "dns_servers": null,
+            "dns_servers": [],
             "edge_zone": "",
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/backend-vm-nic",
             "internal_dns_name_label": "",
@@ -461,7 +461,7 @@
               "10.0.3.4"
             ],
             "resource_group_name": "axion-rg",
-            "tags": null,
+            "tags": {},
             "timeouts": null,
             "virtual_machine_id": ""
           },
@@ -475,6 +475,141 @@
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
           "dependencies": [
             "module.network_interface.data.azurerm_subnet.subnet",
+            "module.resource_group.azurerm_resource_group.rg",
+            "module.subnet.azurerm_subnet.subnet",
+            "module.virtual_network.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.network_security_group",
+      "mode": "managed",
+      "type": "azurerm_network_security_group",
+      "name": "nsg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "backend-nsg",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
+            "location": "centralindia",
+            "name": "backend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "22",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-ssh",
+                "priority": 110,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              },
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "8000",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-app",
+                "priority": 100,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              }
+            ],
+            "tags": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "name": "backend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "subscription_id": "24613c55-f186-46f4-859d-6eed8878ac10"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.resource_group.azurerm_resource_group.rg",
+            "module.subnet.azurerm_subnet.subnet",
+            "module.virtual_network.azurerm_virtual_network.vnet"
+          ]
+        },
+        {
+          "index_key": "frontend-nsg",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
+            "location": "centralindia",
+            "name": "frontend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "22",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-ssh",
+                "priority": 120,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              },
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "80",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-http",
+                "priority": 110,
+                "protocol": "Tcp",
+                "source_address_prefix": "Internet",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              }
+            ],
+            "tags": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "identity": {
+            "name": "frontend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "subscription_id": "24613c55-f186-46f4-859d-6eed8878ac10"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
             "module.resource_group.azurerm_resource_group.rg",
             "module.subnet.azurerm_subnet.subnet",
             "module.virtual_network.azurerm_virtual_network.vnet"
@@ -503,7 +638,7 @@
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/publicIPAddresses/bastion-pip",
             "idle_timeout_in_minutes": 4,
             "ip_address": "52.140.127.137",
-            "ip_tags": null,
+            "ip_tags": {},
             "ip_version": "IPv4",
             "location": "centralindia",
             "name": "bastion-pip",
@@ -512,9 +647,9 @@
             "reverse_fqdn": "",
             "sku": "Standard",
             "sku_tier": "Regional",
-            "tags": null,
+            "tags": {},
             "timeouts": null,
-            "zones": null
+            "zones": []
           },
           "sensitive_attributes": [],
           "identity_schema_version": 0,
@@ -545,7 +680,7 @@
             "location": "centralindia",
             "managed_by": "",
             "name": "axion-rg",
-            "tags": null,
+            "tags": {},
             "timeouts": null
           },
           "sensitive_attributes": [],
@@ -587,7 +722,7 @@
             "route_table_id_wo": null,
             "route_table_id_wo_version": 0,
             "service_endpoint": [],
-            "service_endpoint_policy_ids": null,
+            "service_endpoint_policy_ids": [],
             "sharing_scope": "",
             "timeouts": null,
             "virtual_network_name": "axion-vnet"
@@ -628,7 +763,7 @@
             "route_table_id_wo": null,
             "route_table_id_wo_version": 0,
             "service_endpoint": [],
-            "service_endpoint_policy_ids": null,
+            "service_endpoint_policy_ids": [],
             "sharing_scope": "",
             "timeouts": null,
             "virtual_network_name": "axion-vnet"
@@ -669,7 +804,7 @@
             "route_table_id_wo": null,
             "route_table_id_wo_version": 0,
             "service_endpoint": [],
-            "service_endpoint_policy_ids": null,
+            "service_endpoint_policy_ids": [],
             "sharing_scope": "",
             "timeouts": null,
             "virtual_network_name": "axion-vnet"
@@ -717,8 +852,54 @@
             "name": "axion-vnet",
             "private_endpoint_vnet_policies": "Disabled",
             "resource_group_name": "axion-rg",
-            "subnet": [],
-            "tags": null,
+            "subnet": [
+              {
+                "address_prefixes": [
+                  "10.0.1.0/26"
+                ],
+                "default_outbound_access_enabled": true,
+                "delegation": [],
+                "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/AzureBastionSubnet",
+                "name": "AzureBastionSubnet",
+                "private_endpoint_network_policies": "Disabled",
+                "private_link_service_network_policies_enabled": true,
+                "route_table_id": "",
+                "security_group": "",
+                "service_endpoint": [],
+                "service_endpoint_policy_ids": []
+              },
+              {
+                "address_prefixes": [
+                  "10.0.2.0/24"
+                ],
+                "default_outbound_access_enabled": true,
+                "delegation": [],
+                "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Frontend-Subnet",
+                "name": "Frontend-Subnet",
+                "private_endpoint_network_policies": "Disabled",
+                "private_link_service_network_policies_enabled": true,
+                "route_table_id": "",
+                "security_group": "",
+                "service_endpoint": [],
+                "service_endpoint_policy_ids": []
+              },
+              {
+                "address_prefixes": [
+                  "10.0.3.0/24"
+                ],
+                "default_outbound_access_enabled": true,
+                "delegation": [],
+                "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Backend-Subnet",
+                "name": "Backend-Subnet",
+                "private_endpoint_network_policies": "Disabled",
+                "private_link_service_network_policies_enabled": true,
+                "route_table_id": "",
+                "security_group": "",
+                "service_endpoint": [],
+                "service_endpoint_policy_ids": []
+              }
+            ],
+            "tags": {},
             "timeouts": null
           },
           "sensitive_attributes": [],

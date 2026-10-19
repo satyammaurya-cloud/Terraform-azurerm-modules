@@ -51,7 +51,7 @@ nsgs = {
   frontend-nsg = {
     name                = "frontend-vm-nsg"
     location            = "centralindia"
-    resource_group_name = "lko-rg"
+    resource_group_name = "axion-rg"
 
     rules = [
       {
@@ -79,7 +79,7 @@ nsgs = {
   backend-nsg = {
     name                = "backend-vm-nsg"
     location            = "centralindia"
-    resource_group_name = "lko-rg"
+    resource_group_name = "axion-rg"
 
     rules = [
       {
