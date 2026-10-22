@@ -122,6 +122,22 @@ nics = {
   }
 }
 
+nsg_attachments = {
+  attach1 = {
+    nic_name             = "frontend-vm-nic"
+    virtual_network_name = "axion-vnet"
+    resource_group_name  = "axion-rg"
+    nsg_name             = "frontend-vm-nsg"
+
+  }
+  attach2 = {
+    nic_name             = "backend-vm-nic"
+    virtual_network_name = "axion-vnet"
+    resource_group_name  = "axion-rg"
+    nsg_name             = "backend-vm-nsg"
+  }
+}
+
 bastions = {
   bastion1 = {
     subnet_name          = "AzureBastionSubnet"

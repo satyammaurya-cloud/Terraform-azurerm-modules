@@ -13,22 +13,27 @@ variable "subnets" {
 variable "pips" {
 
 }
- variable "nsgs" {
-   
- }
-
-variable "bastions" {
-
-}
 
 variable "nics" {
 
 }
 
-# variable "vaults" {
+variable "nsgs" {
 
-# }
+}
+
+variable "nsg_attachments" {
+
+}
+variable "bastions" {
+
+}
 
 variable "vms" {
 
 }
+
+
+# variable "vaults" {
+
+# }

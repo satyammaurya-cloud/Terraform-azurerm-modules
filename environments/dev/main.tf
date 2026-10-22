@@ -26,26 +26,40 @@ module "public_ip" {
 
 }
 
-module "network_security_group" {
-  depends_on = [module.subnet]
-  source     = "../../modules/azurerm_network_security_group"
-
-  nsg = var.nsgs
-}
-
 module "network_interface" {
   depends_on = [module.subnet]
-  source     = "../../modules/04-azurerm_network_interface_card"
+  source     = "../../modules/05-azurerm_nic"
 
   nic = var.nics
 
 }
+module "network_security_group" {
+  depends_on = [module.subnet]
+  source     = "../../modules/06-azurerm_nsg"
+
+  nsg = var.nsgs
+}
+
+module "network_security_group_attachment" {
+  depends_on = [module.network_interface, module.network_security_group]
+  source     = "../../modules/07-azurerm_nsg_nic_attachment"
+
+  nsg_attachment = var.nsg_attachments
+}
 
 module "bastion" {
   depends_on = [module.subnet]
-  source     = "../../modules/05-azurerm_bastion"
+  source     = "../../modules/08-azurerm_bastion"
 
   bastion = var.bastions
+}
+
+
+module "linux_vm" {
+  depends_on = [module.network_interface]
+  source     = "../../modules/09-azurerm_linux_virtual_machine"
+
+  vm = var.vms
 }
 
 # module "vault" {
@@ -55,11 +69,3 @@ module "bastion" {
 #   vault = var.vaults
 
 # }
-
-
-module "linux_vm" {
-  depends_on = [module.network_interface]
-  source     = "../../modules/06-azurerm_linux_virtual_machine"
-
-  vm = var.vms
-}

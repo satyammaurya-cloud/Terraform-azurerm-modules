@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.15.8",
-  "serial": 22,
+  "serial": 31,
   "lineage": "55ad295d-067d-bc31-68be-6b1175a6c729",
   "outputs": {},
   "resources": [
@@ -330,7 +330,7 @@
             "default_outbound_access_enabled": true,
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Frontend-Subnet",
             "name": "Frontend-Subnet",
-            "network_security_group_id": "",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
             "private_endpoint_network_policies": "Disabled",
             "private_link_service_network_policies_enabled": true,
             "resource_group_name": "axion-rg",
@@ -353,7 +353,7 @@
             "default_outbound_access_enabled": true,
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Backend-Subnet",
             "name": "Backend-Subnet",
-            "network_security_group_id": "",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
             "private_endpoint_network_policies": "Disabled",
             "private_link_service_network_policies_enabled": true,
             "resource_group_name": "axion-rg",
@@ -535,7 +535,7 @@
                 "source_port_ranges": []
               }
             ],
-            "tags": null,
+            "tags": {},
             "timeouts": null
           },
           "sensitive_attributes": [],
@@ -598,7 +598,7 @@
                 "source_port_ranges": []
               }
             ],
-            "tags": null,
+            "tags": {},
             "timeouts": null
           },
           "sensitive_attributes": [],
@@ -610,6 +610,275 @@
           },
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
           "dependencies": [
+            "module.resource_group.azurerm_resource_group.rg",
+            "module.subnet.azurerm_subnet.subnet",
+            "module.virtual_network.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.network_security_group_attachment",
+      "mode": "data",
+      "type": "azurerm_network_interface",
+      "name": "nic",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "attach1",
+          "schema_version": 0,
+          "attributes": {
+            "accelerated_networking_enabled": false,
+            "applied_dns_servers": [],
+            "auxiliary_mode": "None",
+            "auxiliary_sku": "None",
+            "dns_servers": [],
+            "edge_zone": "",
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/frontend-vm-nic",
+            "internal_dns_name_label": "",
+            "internal_domain_name_suffix": "xzbmbjymvzrulgde3l31ifqbdb.rx.internal.cloudapp.net",
+            "ip_configuration": [
+              {
+                "application_gateway_backend_address_pools_ids": [],
+                "application_security_group_ids": [],
+                "gateway_load_balancer_frontend_ip_configuration_id": "",
+                "load_balancer_backend_address_pools_ids": [],
+                "load_balancer_inbound_nat_rules_ids": [],
+                "name": "internal",
+                "primary": true,
+                "private_ip_address": "10.0.2.4",
+                "private_ip_address_allocation": "Dynamic",
+                "private_ip_address_version": "IPv4",
+                "public_ip_address_id": "",
+                "subnet_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Frontend-Subnet"
+              }
+            ],
+            "ip_forwarding_enabled": false,
+            "location": "centralindia",
+            "mac_address": "70-A8-A5-68-86-F1",
+            "name": "frontend-vm-nic",
+            "network_security_group_id": "",
+            "private_ip_address": "10.0.2.4",
+            "private_ip_addresses": [
+              "10.0.2.4"
+            ],
+            "resource_group_name": "axion-rg",
+            "tags": {},
+            "timeouts": null,
+            "virtual_machine_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Compute/virtualMachines/frontend-vm"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        },
+        {
+          "index_key": "attach2",
+          "schema_version": 0,
+          "attributes": {
+            "accelerated_networking_enabled": false,
+            "applied_dns_servers": [],
+            "auxiliary_mode": "None",
+            "auxiliary_sku": "None",
+            "dns_servers": [],
+            "edge_zone": "",
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/backend-vm-nic",
+            "internal_dns_name_label": "",
+            "internal_domain_name_suffix": "xzbmbjymvzrulgde3l31ifqbdb.rx.internal.cloudapp.net",
+            "ip_configuration": [
+              {
+                "application_gateway_backend_address_pools_ids": [],
+                "application_security_group_ids": [],
+                "gateway_load_balancer_frontend_ip_configuration_id": "",
+                "load_balancer_backend_address_pools_ids": [],
+                "load_balancer_inbound_nat_rules_ids": [],
+                "name": "internal",
+                "primary": true,
+                "private_ip_address": "10.0.3.4",
+                "private_ip_address_allocation": "Dynamic",
+                "private_ip_address_version": "IPv4",
+                "public_ip_address_id": "",
+                "subnet_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Backend-Subnet"
+              }
+            ],
+            "ip_forwarding_enabled": false,
+            "location": "centralindia",
+            "mac_address": "",
+            "name": "backend-vm-nic",
+            "network_security_group_id": "",
+            "private_ip_address": "10.0.3.4",
+            "private_ip_addresses": [
+              "10.0.3.4"
+            ],
+            "resource_group_name": "axion-rg",
+            "tags": {},
+            "timeouts": null,
+            "virtual_machine_id": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.network_security_group_attachment",
+      "mode": "data",
+      "type": "azurerm_network_security_group",
+      "name": "nsg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "attach1",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
+            "location": "centralindia",
+            "name": "frontend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "22",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-ssh",
+                "priority": 120,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              },
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "80",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-http",
+                "priority": 110,
+                "protocol": "Tcp",
+                "source_address_prefix": "Internet",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              }
+            ],
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        },
+        {
+          "index_key": "attach2",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
+            "location": "centralindia",
+            "name": "backend-vm-nsg",
+            "resource_group_name": "axion-rg",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "22",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-ssh",
+                "priority": 110,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              },
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "8000",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "allow-app",
+                "priority": 100,
+                "protocol": "Tcp",
+                "source_address_prefix": "10.0.10.0/24",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              }
+            ],
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.network_security_group_attachment",
+      "mode": "managed",
+      "type": "azurerm_network_interface_security_group_association",
+      "name": "nsg_attachments",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "attach1",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/frontend-vm-nic|/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
+            "network_interface_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/frontend-vm-nic",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "module.network_interface.azurerm_network_interface.nic",
+            "module.network_interface.data.azurerm_subnet.subnet",
+            "module.network_security_group.azurerm_network_security_group.nsg",
+            "module.network_security_group_attachment.data.azurerm_network_interface.nic",
+            "module.network_security_group_attachment.data.azurerm_network_security_group.nsg",
+            "module.resource_group.azurerm_resource_group.rg",
+            "module.subnet.azurerm_subnet.subnet",
+            "module.virtual_network.azurerm_virtual_network.vnet"
+          ]
+        },
+        {
+          "index_key": "attach2",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/backend-vm-nic|/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
+            "network_interface_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkInterfaces/backend-vm-nic",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "module.network_interface.azurerm_network_interface.nic",
+            "module.network_interface.data.azurerm_subnet.subnet",
+            "module.network_security_group.azurerm_network_security_group.nsg",
+            "module.network_security_group_attachment.data.azurerm_network_interface.nic",
+            "module.network_security_group_attachment.data.azurerm_network_security_group.nsg",
             "module.resource_group.azurerm_resource_group.rg",
             "module.subnet.azurerm_subnet.subnet",
             "module.virtual_network.azurerm_virtual_network.vnet"
@@ -753,7 +1022,7 @@
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Frontend-Subnet",
             "ip_address_pool": [],
             "name": "Frontend-Subnet",
-            "network_security_group_id": "",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
             "network_security_group_id_wo": null,
             "network_security_group_id_wo_version": 0,
             "private_endpoint_network_policies": "Disabled",
@@ -794,7 +1063,7 @@
             "id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/virtualNetworks/axion-vnet/subnets/Backend-Subnet",
             "ip_address_pool": [],
             "name": "Backend-Subnet",
-            "network_security_group_id": "",
+            "network_security_group_id": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
             "network_security_group_id_wo": null,
             "network_security_group_id_wo_version": 0,
             "private_endpoint_network_policies": "Disabled",
@@ -879,7 +1148,7 @@
                 "private_endpoint_network_policies": "Disabled",
                 "private_link_service_network_policies_enabled": true,
                 "route_table_id": "",
-                "security_group": "",
+                "security_group": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/frontend-vm-nsg",
                 "service_endpoint": [],
                 "service_endpoint_policy_ids": []
               },
@@ -894,7 +1163,7 @@
                 "private_endpoint_network_policies": "Disabled",
                 "private_link_service_network_policies_enabled": true,
                 "route_table_id": "",
-                "security_group": "",
+                "security_group": "/subscriptions/24613c55-f186-46f4-859d-6eed8878ac10/resourceGroups/axion-rg/providers/Microsoft.Network/networkSecurityGroups/backend-vm-nsg",
                 "service_endpoint": [],
                 "service_endpoint_policy_ids": []
               }
