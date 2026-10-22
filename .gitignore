@@ -10,6 +10,8 @@
 # documents
 *.doc
 
+# Ignore mind folder and all its files
+/environments/dev/mind/
 
 # <----- alias command ---------->
 
