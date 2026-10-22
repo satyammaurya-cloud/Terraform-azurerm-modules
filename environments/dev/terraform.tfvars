@@ -44,6 +44,13 @@ pips = {
     resource_group_name = "axion-rg"
     allocation_method   = "Static"
   }
+  pip2 = {
+    name                = "nat-pip"
+    location            = "centralindia"
+    resource_group_name = "axion-rg"
+    allocation_method   = "Static"
+    zones               = ["1"]
+  }
 }
 
 nsgs = {
@@ -158,6 +165,26 @@ vms = {
     size                = "Standard_B2ls_v2"
   }
 }
+
+nats = {
+  nat1 = {
+    name                = "cust-nat"
+    location            = "centralindia"
+    resource_group_name = "axion-rg"
+  }
+}
+
+nat_attachments = {
+  att1 = {
+    name                 = "cust-nat"
+    pip_name             = "nat-pip"
+    resource_group_name  = "axion-rg"
+    subnet_name          = "Frontend-Subnet"
+    virtual_network_name = "axion-vnet"
+  }
+}
+
+
 
 # vaults = {
 #   vault1 = {

@@ -62,6 +62,25 @@ module "linux_vm" {
   vm = var.vms
 }
 
+module "nat" {
+  depends_on = [module.public_ip]
+
+  source = "../../modules/10-azurerm_nat_gateway"
+
+  nat = var.nats
+
+}
+
+module "nat_associations" {
+  depends_on = [module.nat]
+  source     = "../../modules/11-azurerm_nat_pip_association"
+
+  nat_attachment = var.nat_attachments
+}
+
+
+
+
 # module "vault" {
 #   depends_on = [ module.resource_group ]
 #   source = "../../modules/azurerm_key_vault"
