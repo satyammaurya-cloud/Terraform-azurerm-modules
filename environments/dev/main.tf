@@ -12,7 +12,7 @@ module "virtual_network" {
 }
 
 module "subnet" {
-  depends_on = [module.virtual_network]
+  depends_on = [module.virtual_network, module.resource_group]
   source     = "../../modules/03-azurerm_subnet"
 
   subnet = var.subnets
@@ -48,7 +48,7 @@ module "network_security_group_attachment" {
 }
 
 module "bastion" {
-  depends_on = [module.subnet]
+  depends_on = [module.subnet, public_ip]
   source     = "../../modules/08-azurerm_bastion"
 
   bastion = var.bastions
@@ -63,7 +63,7 @@ module "linux_vm" {
 }
 
 module "nat" {
-  depends_on = [module.public_ip]
+  depends_on = [module.resource_group]
 
   source = "../../modules/10-azurerm_nat_gateway"
 
@@ -72,7 +72,7 @@ module "nat" {
 }
 
 module "nat_associations" {
-  depends_on = [module.nat]
+  depends_on = [module.nat, public_ip, subnet]
   source     = "../../modules/11-azurerm_nat_pip_subnet_association"
 
   nat_attachment = var.nat_attachments
