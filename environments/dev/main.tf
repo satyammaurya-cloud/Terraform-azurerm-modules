@@ -73,7 +73,7 @@ module "nat" {
 
 module "nat_associations" {
   depends_on = [module.nat]
-  source     = "../../modules/11-azurerm_nat_pip_association"
+  source     = "../../modules/11-azurerm_nat_pip_subnet_association"
 
   nat_attachment = var.nat_attachments
 }
