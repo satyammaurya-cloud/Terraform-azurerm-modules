@@ -8,5 +8,5 @@ resource "azurerm_public_ip" "pip" {
   allocation_method   = each.value.allocation_method
   sku                 = "Standard"
 
-  zones = each.value.zones
+  zones               = each.value.zones
 }

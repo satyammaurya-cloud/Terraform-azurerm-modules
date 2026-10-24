@@ -1,3 +1,4 @@
+# Data block to read the NIC ID
 data "azurerm_network_interface" "nic" {
   for_each = var.vm
 
@@ -5,7 +6,7 @@ data "azurerm_network_interface" "nic" {
   resource_group_name = each.value.resource_group_name
 }
 
-
+# Create the linux VM
 resource "azurerm_linux_virtual_machine" "linux_vm" {
   for_each = var.vm 
 

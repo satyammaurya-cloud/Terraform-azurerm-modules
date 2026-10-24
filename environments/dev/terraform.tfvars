@@ -174,16 +174,29 @@ nats = {
   }
 }
 
-nat_attachments = {
-  att1 = {
-    name                 = "cust-nat"
-    pip_name             = "nat-pip"
-    resource_group_name  = "axion-rg"
-    subnet_name          = "Frontend-Subnet"
-    virtual_network_name = "axion-vnet"
+nat_pip_associations = {
+  nat_pip1 = {
+    nat_name            = "cust-nat"
+    pip_name            = "nat-pip"
+    resource_group_name = "axion-rg"
   }
 }
 
+nat_subnet_associations = {
+  nat_frontend_attach1 = {
+    nat_name             = "cust-nat"
+    resource_group_name  = "axion-rg"
+    virtual_network_name = "axion-vnet"
+    subnet_name          = "Frontend-Subnet"
+  }
+
+  nat_backend_attach2 = {
+    nat_name             = "cust-nat"
+    resource_group_name  = "axion-rg"
+    virtual_network_name = "axion-vnet"
+    subnet_name          = "Backend-Subnet"
+  }
+}
 
 
 # vaults = {
@@ -193,4 +206,3 @@ nat_attachments = {
 #     resource_group_name = "axion-rg"
 #   }
 # }
-

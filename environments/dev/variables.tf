@@ -31,6 +31,7 @@ variable "nsgs" {
 variable "nsg_attachments" {
 
 }
+
 variable "bastions" {
 
 }
@@ -43,7 +44,11 @@ variable "nats" {
 
 }
 
-variable "nat_attachments" {
+variable "nat_pip_associations" {
+
+}
+
+variable "nat_subnet_associations" {
 
 }
 

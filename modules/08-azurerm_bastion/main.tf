@@ -7,7 +7,7 @@ data "azurerm_subnet" "subnet" {
   resource_group_name  = each.value.resource_group_name
 }
 
-# Data block to read the public IP
+# Data block to read the public IP ID
 data "azurerm_public_ip" "pip" {
   for_each = var.bastion
 

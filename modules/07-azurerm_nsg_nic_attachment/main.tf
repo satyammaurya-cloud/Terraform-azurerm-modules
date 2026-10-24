@@ -1,3 +1,4 @@
+# Existing NIC ID ko read karna
 data "azurerm_network_interface" "nic" {
   for_each = var.nsg_attachment
 
@@ -5,6 +6,7 @@ data "azurerm_network_interface" "nic" {
   resource_group_name = each.value.resource_group_name
 }
 
+# Data block to read the NSG ID
 data "azurerm_network_security_group" "nsg" {
   for_each = var.nsg_attachment
 
@@ -12,6 +14,7 @@ data "azurerm_network_security_group" "nsg" {
   resource_group_name = each.value.resource_group_name
 }
 
+# Attach Network Interfaces with NSG 
 resource "azurerm_network_interface_security_group_association" "nsg_attachments" {
 
   for_each = var.nsg_attachment

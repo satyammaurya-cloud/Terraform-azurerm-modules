@@ -1,3 +1,5 @@
+# Create NSG with dynamic block rules
+
 resource "azurerm_network_security_group" "nsg" {
   for_each = var.nsg
 
